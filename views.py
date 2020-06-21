@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import urllib.parse
 
-SANAL_POS = {
+LOGIN_PAGE = {
     'customer_id': '400235',
     'merchant_id': '496',
     'username': 'admin',
@@ -40,9 +40,9 @@ def ok_url(request):
     md_end = data.find('</MD>')
     md = data[md_start + 4:md_end]
     hashed_password = base64.b64encode(
-        hashlib.sha1(SANAL_POS["password"].encode('ISO-8859-9')).digest()).decode()
+        hashlib.sha1(LOGIN_PAGE["password"].encode('ISO-8859-9')).digest()).decode()
     hashed_data = base64.b64encode(hashlib.sha1(
-        f'{SANAL_POS["merchant_id"]}{merchant_order_id}{amount}{SANAL_POS["username"]}{hashed_password}'.encode(
+        f'{LOGIN_PAGE["merchant_id"]}{merchant_order_id}{amount}{SANAL_POS["username"]}{hashed_password}'.encode(
             "ISO-8859-9")).digest()).decode()
     xml = f"""
 
